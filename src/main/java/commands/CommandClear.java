@@ -1,5 +1,6 @@
 package commands;
 
+import collectionElements.Vehicle;
 import managers.CollectionManager;
 
 public class CommandClear extends Command {

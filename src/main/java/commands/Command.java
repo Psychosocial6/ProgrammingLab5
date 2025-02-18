@@ -6,8 +6,10 @@ import managers.CollectionManager;
 public abstract class Command implements CommandInterface {
 
     protected static CollectionManager collectionManager;
+    public boolean requiresVehicleObject;
 
     public Command(CollectionManager collectionManager) {
         Command.collectionManager = collectionManager;
+        requiresVehicleObject = false;
     }
 }

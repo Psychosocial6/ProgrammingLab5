@@ -12,7 +12,7 @@ public class CommandExecute extends Command {
 
     @Override
     public void execute(Object[] args) {
-        File file = (File) args[0];
+        File file = new File((String) args[0]);
         collectionManager.executeScript(file);
     }
 

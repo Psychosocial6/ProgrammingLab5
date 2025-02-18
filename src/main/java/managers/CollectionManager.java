@@ -1,8 +1,11 @@
 package managers;
 
 import collectionElements.Vehicle;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import java.io.File;
 import java.time.ZonedDateTime;
@@ -10,10 +13,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Hashtable;
 
+
 public class CollectionManager {
     @JacksonXmlElementWrapper(useWrapping = false)
-    @JacksonXmlProperty(localName = "collection")
     private Hashtable<String, Vehicle> collection;
+    @JsonIgnore
     private final ZonedDateTime initializationDate;
 
     public CollectionManager() {
@@ -35,11 +39,18 @@ public class CollectionManager {
     }
 
     public void show() {
-        for (String key : collection.keySet()) {
-            System.out.println("----------");
-            System.out.println(String.format("%s \n", collection.get(key)));
-            System.out.println("----------");
+        if (collection.isEmpty()) {
+            System.out.println("Collection is empty");
         }
+        else {
+            System.out.println("----------");
+            for (String key : collection.keySet()) {
+                System.out.println(String.format("%s : %s", key, collection.get(key)));
+                System.out.println(collection.get(key).getId());
+                System.out.println("----------");
+            }
+        }
+
     }
 
     public void insert(String key, Vehicle element) {
@@ -65,7 +76,7 @@ public class CollectionManager {
     }
 
     public void save(File file) {
-
+        
     }
 
     public void executeScript(File file) {
@@ -122,5 +133,17 @@ public class CollectionManager {
         for (Long dist : distances) {
             System.out.println(dist);
         }
+    }
+
+    public Hashtable<String, Vehicle> getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Hashtable<String, Vehicle> collection) {
+        this.collection = collection;
+    }
+
+    public ZonedDateTime getInitializationDate() {
+        return initializationDate;
     }
 }

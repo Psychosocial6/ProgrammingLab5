@@ -9,20 +9,18 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 public class XMLReader {
 
-    public static CollectionManager deserializeFromXML() {
+    public static CollectionManager deserializeFromXML(String XMLLine) {
+        XmlMapper xmlMapper = new XmlMapper();
+        CollectionManager collection = null;
         try {
-            XmlMapper xmlMapper = new XmlMapper();
-            CollectionManager collection = xmlMapper.readValue(new File("input.xml"), CollectionManager.class);
-
-            return collection;
+            collection = xmlMapper.readValue(XMLLine, CollectionManager.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        catch (IOException) {
-            System.out.println("XML reading error");
-        }
-
+        return collection;
     }
-
 }

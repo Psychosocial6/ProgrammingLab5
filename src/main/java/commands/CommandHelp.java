@@ -13,7 +13,7 @@ public class CommandHelp extends Command{
     @Override
     public void execute(Object[] args) {
         for (Object command: args) {
-            ((Command) command).getInfo();
+            System.out.println(((Command) command).getInfo());
         }
     }
 

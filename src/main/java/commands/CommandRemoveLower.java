@@ -7,6 +7,7 @@ public class CommandRemoveLower extends Command {
 
     public CommandRemoveLower(CollectionManager collectionManager) {
         super(collectionManager);
+        requiresVehicleObject = true;
     }
 
     @Override

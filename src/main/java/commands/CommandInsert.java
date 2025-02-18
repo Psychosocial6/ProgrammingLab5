@@ -7,6 +7,7 @@ public class CommandInsert extends Command {
 
     public CommandInsert(CollectionManager collectionManager) {
         super(collectionManager);
+        requiresVehicleObject = true;
     }
 
     @Override

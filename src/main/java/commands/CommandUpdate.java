@@ -7,11 +7,12 @@ public class CommandUpdate extends Command {
 
     public CommandUpdate(CollectionManager collectionManager) {
         super(collectionManager);
+        requiresVehicleObject = true;
     }
 
     @Override
     public void execute(Object[] args) {
-        int id = (int) args[0];
+        int id = Integer.parseInt((String)args[0]);
         Vehicle element = (Vehicle) args[1];
         collectionManager.updateById(id, element);
     }

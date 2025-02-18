@@ -7,6 +7,7 @@ public class CommandReplaceIfGreater extends Command {
 
     public CommandReplaceIfGreater(CollectionManager collectionManager) {
         super(collectionManager);
+        requiresVehicleObject = true;
     }
 
     @Override

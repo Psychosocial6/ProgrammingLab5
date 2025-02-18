@@ -1,5 +1,6 @@
 package collectionElements;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import exceptions.WrongDataException;
@@ -7,12 +8,17 @@ import utils.IDGenerator;
 
 import java.time.ZonedDateTime;
 
+
 public class Vehicle extends Element {
+    @JacksonXmlProperty(isAttribute = true)
+    private String key;
+    @JsonIgnore
     private Long id;
     @JacksonXmlProperty(localName = "name")
     private String name;
     @JacksonXmlProperty(localName = "coordinates")
     private Coordinates coordinates;
+    @JsonIgnore
     private ZonedDateTime creationDate;
     @JacksonXmlProperty(localName = "enginePower")
     private Long enginePower;
@@ -23,7 +29,12 @@ public class Vehicle extends Element {
     @JacksonXmlProperty(localName = "fuelType")
     private FuelType fuelType;
 
-    public Vehicle(String name, Coordinates coordinates, ZonedDateTime creationDate, Long enginePower, double capacity, Long distanceTravelled, FuelType fuelType) {
+    public Vehicle() {
+        id = (long) IDGenerator.getNewID();
+        creationDate = ZonedDateTime.now();
+    }
+
+    public Vehicle(String name, Coordinates coordinates, Long enginePower, double capacity, Long distanceTravelled, FuelType fuelType) {
         this.name = name;
         this.coordinates = coordinates;
         this.creationDate = creationDate;
@@ -50,7 +61,7 @@ public class Vehicle extends Element {
         if (creationDate == null) {
             throw new WrongDataException("Wrong creation date");
         }
-        if (enginePower == null || enginePower <= 0) {
+        if (!(enginePower == null) && enginePower <= 0) {
             throw new WrongDataException("Wrong engine power");
         }
         if (capacity <= 0) {
@@ -91,5 +102,10 @@ public class Vehicle extends Element {
 
     public FuelType getFuelType() {
         return fuelType;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
