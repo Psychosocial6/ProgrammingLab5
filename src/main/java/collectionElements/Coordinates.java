@@ -42,4 +42,9 @@ public class Coordinates extends Element {
     public void setY(Long y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return String.format("{x=%d, y=%d}", x, y);
+    }
 }

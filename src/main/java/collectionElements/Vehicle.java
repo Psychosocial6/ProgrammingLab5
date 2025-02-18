@@ -9,9 +9,7 @@ import utils.IDGenerator;
 import java.time.ZonedDateTime;
 
 
-public class Vehicle extends Element {
-    @JacksonXmlProperty(isAttribute = true)
-    private String key;
+public class Vehicle extends Element implements Comparable<Vehicle> {
     @JsonIgnore
     private Long id;
     @JacksonXmlProperty(localName = "name")
@@ -106,6 +104,23 @@ public class Vehicle extends Element {
 
     @Override
     public String toString() {
-        return name;
+        return String.format("Vehicle: id=%d, name=%s, coordinates=%s, creationDate=%s, enginePower=%d, capacity=%f, distanceTravelled=%d, fuelType=%s", id, name, coordinates, creationDate, enginePower, capacity, distanceTravelled, fuelType);
+    }
+
+    @Override
+    public int compareTo(Vehicle o) {
+        if (name.compareTo(o.getName()) == 0) {
+            if (enginePower.compareTo(o.getEnginePower()) == 0) {
+                if (((Double) capacity).compareTo(o.getCapacity()) == 0) {
+                    if (distanceTravelled.compareTo(o.getDistanceTravelled()) == 0) {
+                        return 0;
+                    }
+                    return distanceTravelled.compareTo(o.getDistanceTravelled());
+                }
+                return ((Double) capacity).compareTo(o.getCapacity());
+            }
+            return enginePower.compareTo(o.getEnginePower());
+        }
+        return name.compareTo(o.getName());
     }
 }

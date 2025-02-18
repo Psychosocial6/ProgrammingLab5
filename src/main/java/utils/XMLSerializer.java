@@ -4,7 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import managers.CollectionManager;
 
-public class XMLWriter {
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
+public class XMLSerializer {
 
     public static String serializeToXML(CollectionManager collectionManager) {
         XmlMapper xmlMapper = new XmlMapper();
@@ -16,4 +19,5 @@ public class XMLWriter {
         }
         return xml;
     }
+
 }

@@ -6,14 +6,12 @@ import exceptions.ExecutionException;
 import managers.CollectionManager;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Invoker {
 
-    private HashMap<String, Command> commands;
+    private HashMap<String, Command> commands = new HashMap<>();
 
     public Invoker(CollectionManager collectionManager) {
-        commands = new HashMap<>();
         commands.put("help", new CommandHelp(collectionManager));
         commands.put("info", new CommandInfo(collectionManager));
         commands.put("show", new CommandShow(collectionManager));
@@ -22,7 +20,6 @@ public class Invoker {
         commands.put("remove_key", new CommandRemoveKey(collectionManager));
         commands.put("clear", new CommandClear(collectionManager));
         commands.put("save", new CommandSave(collectionManager));
-        commands.put("execute_script", new CommandExecute(collectionManager));
         commands.put("exit", new CommandExit(collectionManager));
         commands.put("remove_lower", new CommandRemoveLower(collectionManager));
         commands.put("replace_if_greater", new CommandReplaceIfGreater(collectionManager));
@@ -30,6 +27,7 @@ public class Invoker {
         commands.put("filter_contains_name", new CommandFilterContainsName(collectionManager));
         commands.put("filter_starts_with_name", new CommandFilterStartsWithName(collectionManager));
         commands.put("print_field_ascending_distance_travelled", new CommandPrintFieldAscendingDistanceTravelled(collectionManager));
+        commands.put("execute_script", new CommandExecute(collectionManager, this));
     }
 
     public HashMap<String, Command> getCommands() {
@@ -41,6 +39,8 @@ public class Invoker {
             commands.get(token).execute(args);
         }
         catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getClass());
             throw new ExecutionException(String.format("Command %s's execution failed", token));
         }
     }

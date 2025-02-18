@@ -2,10 +2,12 @@ package managers;
 
 import collectionElements.Vehicle;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import exceptions.ScriptExecutionException;
+import utils.FileWriter;
+import utils.Invoker;
+import utils.ScriptExecutor;
+import utils.XMLSerializer;
 
 import java.io.File;
 import java.time.ZonedDateTime;
@@ -46,7 +48,6 @@ public class CollectionManager {
             System.out.println("----------");
             for (String key : collection.keySet()) {
                 System.out.println(String.format("%s : %s", key, collection.get(key)));
-                System.out.println(collection.get(key).getId());
                 System.out.println("----------");
             }
         }
@@ -76,11 +77,16 @@ public class CollectionManager {
     }
 
     public void save(File file) {
-        
+        FileWriter.writeIntoFile(file, XMLSerializer.serializeToXML(this));
     }
 
-    public void executeScript(File file) {
-
+    public void executeScript(File file, Invoker invoker) {
+        ScriptExecutor executor = new ScriptExecutor(invoker);
+        try {
+            executor.executeScript(file);
+        } catch (ScriptExecutionException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void exit() {
@@ -88,21 +94,25 @@ public class CollectionManager {
     }
 
     public void removeIfLower(Vehicle element) {
-        /*
+        Hashtable<String, Vehicle> collection2 = (Hashtable<String, Vehicle>) collection.clone();
         for (String key : collection.keySet()) {
-            if (collection.get(key) < element) {
-                collection.remove(key);
+            if (collection.get(key).compareTo(element) < 0) {
+                collection2.remove(key);
             }
         }
-        */
+        collection = collection2;
     }
 
     public void replaceIfLower(String key, Vehicle element) {
-
+        if (collection.get(key).compareTo(element) < 0) {
+            collection.put(key, element);
+        }
     }
 
     public void replaceIfGreater(String key, Vehicle element) {
-
+        if (collection.get(key).compareTo(element) > 0) {
+            collection.put(key, element);
+        }
     }
 
     public void filterContainsName(String name) {

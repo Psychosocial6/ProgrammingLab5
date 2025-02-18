@@ -1,17 +1,11 @@
 package utils;
 
-import collectionElements.Vehicle;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import managers.CollectionManager;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
 
-public class XMLReader {
+public class XMLDeserializer {
 
     public static CollectionManager deserializeFromXML(String XMLLine) {
         XmlMapper xmlMapper = new XmlMapper();

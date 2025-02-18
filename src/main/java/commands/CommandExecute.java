@@ -1,19 +1,23 @@
 package commands;
 
 import managers.CollectionManager;
+import utils.Invoker;
+import utils.ScriptExecutor;
 
 import java.io.File;
 
 public class CommandExecute extends Command {
+    private Invoker invoker;
 
-    public CommandExecute(CollectionManager collectionManager) {
+    public CommandExecute(CollectionManager collectionManager, Invoker invoker) {
         super(collectionManager);
     }
 
     @Override
     public void execute(Object[] args) {
         File file = new File((String) args[0]);
-        collectionManager.executeScript(file);
+        System.out.println(args[0]);
+        collectionManager.executeScript(file, invoker);
     }
 
     @Override

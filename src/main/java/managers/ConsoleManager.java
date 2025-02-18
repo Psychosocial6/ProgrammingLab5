@@ -157,7 +157,7 @@ public class ConsoleManager {
                     else {
                         args = new Object[input.length - 1];
                         for (int i = 1; i < input.length; i++) {
-                            args[i - 1] = input[0];
+                            args[i - 1] = input[i];
                         }
                     }
                     if (commandToken.equals("help")) {
