@@ -3,8 +3,17 @@ package utils;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Утилитный класс для записи файлов
+ * @author Андрей
+ * */
 public class FileWriter {
 
+    /**
+     * Метод осуществляющий запись строки в файл
+     * @param file - файл для записи
+     * @param data - данные которые необходимо записать
+     */
     public static void writeIntoFile(File file, String data) {
         try {
             FileOutputStream outputStream = new FileOutputStream(file);

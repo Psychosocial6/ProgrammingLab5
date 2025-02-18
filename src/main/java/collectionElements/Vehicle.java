@@ -8,7 +8,10 @@ import utils.IDGenerator;
 
 import java.time.ZonedDateTime;
 
-
+/**
+ * Класс описывающий транспортные средства, хранящиеся в коллекции
+ * @author Андрей
+ * */
 public class Vehicle extends Element implements Comparable<Vehicle> {
     @JsonIgnore
     private Long id;
@@ -27,15 +30,26 @@ public class Vehicle extends Element implements Comparable<Vehicle> {
     @JacksonXmlProperty(localName = "fuelType")
     private FuelType fuelType;
 
+    /**
+     * Пустой конструктор для десериализации
+     * */
     public Vehicle() {
         id = (long) IDGenerator.getNewID();
         creationDate = ZonedDateTime.now();
     }
 
+    /**
+     * Конструктор
+     * @param name название
+     * @param coordinates класс, хранящий координаты
+     * @param enginePower мощность двигателя (null если отсутствует)
+     * @param capacity вместительность
+     * @param distanceTravelled пробег (null если отсутствует)
+     * @param fuelType тип топлива
+     * */
     public Vehicle(String name, Coordinates coordinates, Long enginePower, double capacity, Long distanceTravelled, FuelType fuelType) {
         this.name = name;
         this.coordinates = coordinates;
-        this.creationDate = creationDate;
         this.enginePower = enginePower;
         this.capacity = capacity;
         this.distanceTravelled = distanceTravelled;
@@ -44,6 +58,10 @@ public class Vehicle extends Element implements Comparable<Vehicle> {
         creationDate = ZonedDateTime.now();
     }
 
+    /**
+     * Метод для проверки полей на правильность данных
+     * @throws WrongDataException - уведомляет о неверных данных
+     * */
     @Override
     public void validate() throws WrongDataException {
         if (id == null || id <= 0) {
@@ -70,43 +88,84 @@ public class Vehicle extends Element implements Comparable<Vehicle> {
         }
     }
 
+    /**
+     * Метод возвращающий значение поля id
+     * @return Long id
+     * */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Метод возвращающий значения поля name
+     * @return String name
+     * */
     public String getName() {
         return name;
     }
 
+    /**
+     * Метод возвращающий поле coordinates
+     * @return Coordinates coordinates
+     * */
     public Coordinates getCoordinates() {
         return coordinates;
     }
 
+    /**
+     * Метод возвращающий поле creationDate
+     * @return ZonedDateTime creationDate
+     * */
     public ZonedDateTime getCreationDate() {
         return creationDate;
     }
 
+    /**
+     * Метод возвращающий поле enginePower
+     * @return Long enginePower
+     * */
     public Long getEnginePower() {
         return enginePower;
     }
 
+    /**
+     * Метод возвращающий поле capacity
+     * @return double capacity
+     * */
     public double getCapacity() {
         return capacity;
     }
 
+    /**
+     * Метод возвращающий поле distanceTravelled
+     * @return Long distanceTravelled
+     * */
     public Long getDistanceTravelled() {
         return distanceTravelled;
     }
 
+    /**
+     * Метод возвращающий поле fuelType
+     * @return FuelType fuelType
+     * */
     public FuelType getFuelType() {
         return fuelType;
     }
 
+    /**
+     * Метод возвращающий строковое предстваление объекта
+     * @return String поля класс
+     * */
     @Override
     public String toString() {
         return String.format("Vehicle: id=%d, name=%s, coordinates=%s, creationDate=%s, enginePower=%d, capacity=%f, distanceTravelled=%d, fuelType=%s", id, name, coordinates, creationDate, enginePower, capacity, distanceTravelled, fuelType);
     }
 
+    /**
+     * Метод позволяющий сравнить 2 объекта Vehicle
+     * @param o - объект с которым сравнивается данный
+     * @return int >0 если this > o, <0 если this < o, 0 если this == 0
+     * */
     @Override
     public int compareTo(Vehicle o) {
         if (name.compareTo(o.getName()) == 0) {

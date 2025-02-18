@@ -1,5 +1,9 @@
 package collectionElements;
 
+/**
+ * Перечисление видов топлива
+ * @author Андрей
+ * */
 public enum FuelType {
     ELECTRICITY("ELECTRICITY"),
     DIESEL("DIESEL"),
@@ -9,11 +13,11 @@ public enum FuelType {
 
     public String fuelType;
 
+    /**
+     * Конструктор
+     * @param fuelType - строковое представление элемента перечисления
+     * */
     FuelType(String fuelType) {
         this.fuelType = fuelType;
-    }
-
-    public String getFuelType() {
-        return fuelType;
     }
 }

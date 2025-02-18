@@ -8,20 +8,32 @@ import exceptions.CommandTokenException;
 import exceptions.ExecutionException;
 import exceptions.ScriptExecutionException;
 import exceptions.WrongDataException;
-import managers.CollectionManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Класс исполняющий скрипт из файла
+ * @author Андрей
+ * */
 public class ScriptExecutor {
     private Invoker invoker;
 
+    /**
+     * Конструктор
+     * @param invoker - исполнитель команд
+     */
     public ScriptExecutor(Invoker invoker) {
         this.invoker = invoker;
     }
 
+    /**
+     * Метод исполняющий скрипт из файла
+     * @param file - файл со скриптом
+     * @throws ScriptExecutionException - исключение при ошибке исполнения скрипта
+     */
     public void executeScript(File file) throws ScriptExecutionException {
         Scanner scanner = null;
         try {

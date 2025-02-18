@@ -14,13 +14,26 @@ import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Класс для чтения консоли и обработки ввода
+ * @author Андрей
+ * */
 public class ConsoleManager {
     private Invoker invoker;
 
+
+    /**
+     * Конструктор
+     * @param invoker - класс исполняющий команды
+     */
     public ConsoleManager(Invoker invoker) {
         this.invoker = invoker;
     }
 
+
+    /**
+     * Метод читающий и обрабатывающий данные для передачи командам
+     */
     public void readConsole() {
         Scanner scanner = new Scanner(System.in);
         while (true) {

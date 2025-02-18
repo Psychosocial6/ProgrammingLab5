@@ -1,16 +1,24 @@
 package utils;
 
 import commands.*;
-import exceptions.CommandTokenException;
 import exceptions.ExecutionException;
 import managers.CollectionManager;
 
 import java.util.HashMap;
 
+/**
+ * Класс хранящий команды и осуществляющий их исполнение
+ * @author Андрей
+ */
 public class Invoker {
 
     private HashMap<String, Command> commands = new HashMap<>();
 
+
+    /**
+     * Конструктор
+     * @param collectionManager - управляемая коллекция
+     */
     public Invoker(CollectionManager collectionManager) {
         commands.put("help", new CommandHelp(collectionManager));
         commands.put("info", new CommandInfo(collectionManager));
@@ -30,15 +38,22 @@ public class Invoker {
         commands.put("execute_script", new CommandExecute(collectionManager, this));
     }
 
+    /**
+     * Метод возвращающий все команды
+     * @return command - словрь <ключ, команда>
+     */
     public HashMap<String, Command> getCommands() {
         return commands;
     }
 
-    public void addCommand(String key, Command command) {
-        commands.put(key, command);
-    }
 
-    public void executeCommandUsingToken(String token, Object[]args) throws ExecutionException {
+    /**
+     * Метод исполняющий команду по ее строковому названию
+     * @param token - ключ под которым хранится команда
+     * @param args - аргументы команды
+     * @throws ExecutionException - исключение при ошибке исполнения команды
+     */
+    public void executeCommandUsingToken(String token, Object[] args) throws ExecutionException {
         try {
             commands.get(token).execute(args);
         }

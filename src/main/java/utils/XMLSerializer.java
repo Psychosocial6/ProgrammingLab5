@@ -4,11 +4,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import managers.CollectionManager;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-
+/**
+ * Утилитный класс для сериализации xml
+ * @author Андрей
+ * */
 public class XMLSerializer {
 
+    /**
+     * Метод для сериализации коллекци в формате XML
+     * @param collectionManager - Коллекция для сериализации
+     * @return String xml - сериализованный объект
+     */
     public static String serializeToXML(CollectionManager collectionManager) {
         XmlMapper xmlMapper = new XmlMapper();
         String xml = "";
