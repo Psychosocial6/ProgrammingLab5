@@ -11,12 +11,12 @@ public class CommandExecute extends Command {
 
     public CommandExecute(CollectionManager collectionManager, Invoker invoker) {
         super(collectionManager);
+        this.invoker = invoker;
     }
 
     @Override
     public void execute(Object[] args) {
         File file = new File((String) args[0]);
-        System.out.println(args[0]);
         collectionManager.executeScript(file, invoker);
     }
 

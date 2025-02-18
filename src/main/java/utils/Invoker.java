@@ -34,6 +34,10 @@ public class Invoker {
         return commands;
     }
 
+    public void addCommand(String key, Command command) {
+        commands.put(key, command);
+    }
+
     public void executeCommandUsingToken(String token, Object[]args) throws ExecutionException {
         try {
             commands.get(token).execute(args);
@@ -41,6 +45,7 @@ public class Invoker {
         catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println(e.getClass());
+            e.printStackTrace();
             throw new ExecutionException(String.format("Command %s's execution failed", token));
         }
     }

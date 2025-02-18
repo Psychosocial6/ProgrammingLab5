@@ -4,6 +4,7 @@ import collectionElements.Coordinates;
 import collectionElements.FuelType;
 import collectionElements.Vehicle;
 import commands.Command;
+import commands.CommandExecute;
 import exceptions.CommandTokenException;
 import exceptions.ExecutionException;
 import exceptions.WrongDataException;

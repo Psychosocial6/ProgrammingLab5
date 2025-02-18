@@ -8,6 +8,7 @@ import exceptions.CommandTokenException;
 import exceptions.ExecutionException;
 import exceptions.ScriptExecutionException;
 import exceptions.WrongDataException;
+import managers.CollectionManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
