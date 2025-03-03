@@ -3,13 +3,25 @@ package commands;
 import collectionElements.Vehicle;
 import managers.CollectionManager;
 
+/**
+ * Класс команды обновления элемента по id
+ * @author Андрей
+ * */
 public class CommandUpdate extends Command {
 
+    /**
+     * Конструктор
+     * @param collectionManager - класс управляющий коллекцией
+     * */
     public CommandUpdate(CollectionManager collectionManager) {
-        super(collectionManager);
+        super(collectionManager, 1);
         requiresVehicleObject = true;
     }
 
+    /**
+     * Метод реализующий исполнение команды
+     * @param args - массив аргументов команды
+     * */
     @Override
     public void execute(Object[] args) {
         int id = Integer.parseInt((String)args[0]);
@@ -17,8 +29,12 @@ public class CommandUpdate extends Command {
         collectionManager.updateById(id, element);
     }
 
+    /**
+     * Метод возвращающий информацию о команде
+     * @return String info
+     * */
     @Override
     public String getInfo() {
-        return "Обновить значение элемента коллекции, id которого равен заданному: update id {element}";
+        return "update id {element}: обновить значение элемента коллекции, id которого равен заданному";
     }
 }

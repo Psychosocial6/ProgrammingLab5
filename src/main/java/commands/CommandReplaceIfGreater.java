@@ -3,13 +3,25 @@ package commands;
 import collectionElements.Vehicle;
 import managers.CollectionManager;
 
+/**
+ * Класс команды замены объекта если больше
+ * @author Андрей
+ * */
 public class CommandReplaceIfGreater extends Command {
 
+    /**
+     * Конструктор
+     * @param collectionManager - класс управляющий коллекцией
+     * */
     public CommandReplaceIfGreater(CollectionManager collectionManager) {
-        super(collectionManager);
+        super(collectionManager, 1);
         requiresVehicleObject = true;
     }
 
+    /**
+     * Метод реализующий исполнение команды
+     * @param args - массив аргументов команды
+     * */
     @Override
     public void execute(Object[] args) {
         String key = (String) args[0];
@@ -17,8 +29,12 @@ public class CommandReplaceIfGreater extends Command {
         collectionManager.replaceIfGreater(key, element);
     }
 
+    /**
+     * Метод возвращающий информацию о команде
+     * @return String info
+     * */
     @Override
     public String getInfo() {
-        return "Заменить значение по ключу, если новое значение больше старого: replace_if_greater null {element}";
+        return "replace_if_greater null {element}: заменить значение по ключу, если новое значение больше старого";
     }
 }
